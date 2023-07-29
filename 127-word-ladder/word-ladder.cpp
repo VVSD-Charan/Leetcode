@@ -9,6 +9,8 @@ public:
         queue<string>q;
         q.push(beginWord);
 
+        if(s.find(beginWord)!=s.end())s.erase(s.find(beginWord));
+
         int changes = 0;
 
         while(q.size() && s.size())
