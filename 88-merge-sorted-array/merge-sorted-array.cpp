@@ -2,6 +2,7 @@ class Solution {
 public:
     void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) 
     {
+        //Using concept of shell sort
         int gap = (n+m)/2 + (n+m)%2;
 
         while(gap)
