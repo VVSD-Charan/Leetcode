@@ -15,10 +15,8 @@ public:
             {
                 counter++;
             }
-            if(mp.find(curr_sum - k)!=mp.end())
-            {
-                counter+=mp[curr_sum-k];
-            }
+            counter+=mp[curr_sum-k];
+            
             mp[curr_sum]++;
         }
 
