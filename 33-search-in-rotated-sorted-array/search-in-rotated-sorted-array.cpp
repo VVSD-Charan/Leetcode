@@ -7,7 +7,7 @@ public:
 
         while(hi - lo > 1)
         {
-            int mid = (lo + hi)/2;
+            int mid = (lo + hi)>>1;
 
             if(nums[mid]==target)return mid;
             if(nums[lo]==target)return lo;
