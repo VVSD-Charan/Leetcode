@@ -7,7 +7,9 @@ public:
 
         for(int i=0;i<piles.size();i++)
         {
-            sum += (piles[i]/n) + (piles[i]%n==0? 0:1);
+            sum += (piles[i]/n);
+
+            if(piles[i]%n > 0)sum++;
 
             if(sum > h)return false;
         }
