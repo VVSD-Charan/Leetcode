@@ -9,7 +9,7 @@ public:
         {
             vector<int>v;
 
-            for(int j=0 ; j<n ; j++)
+            for(int j=0 ; j < n ; j++)
             {
                 int res = ( i & (1<<j));
 
