@@ -10,10 +10,10 @@ public:
         int ans = 0;
         int curr = (i1 == i2 && j1 == j2)? grid[i1][j1] : grid[i1][j1]+grid[i2][j2];
 
-        int move1 = f(grid,i1+1,j1,i2+1,j2,n,dp);
-        int move2 = f(grid,i1+1,j1,i2,j2+1,n,dp);
-        int move3 = f(grid,i1,j1+1,i2+1,j2,n,dp);
-        int move4 = f(grid,i1,j1+1,i2,j2+1,n,dp);
+        int move1 =(i1 + 1 < n && i2 + 1 < n)?  f(grid,i1+1,j1,i2+1,j2,n,dp): -1e5;
+        int move2 =(i1 + 1 < n && j2 + 1 < n)? f(grid,i1+1,j1,i2,j2+1,n,dp) : -1e5;
+        int move3 =(j1 + 1 < n && i2 + 1 < n)? f(grid,i1,j1+1,i2+1,j2,n,dp) : -1e5;
+        int move4 =(j1 + 1 < n && j2 + 1 < n)? f(grid,i1,j1+1,i2,j2+1,n,dp) : -1e5;
 
         return dp[i1][j1][i2][j2] = curr + max(max(move1,move2),max(move3,move4));
     }
