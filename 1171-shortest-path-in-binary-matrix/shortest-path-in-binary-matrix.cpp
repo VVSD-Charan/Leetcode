@@ -37,6 +37,8 @@ public:
                     {
                         vis[cx][cy] = true;
                         q.push({cx,cy});
+
+                        if(cx == n-1 && cy == n-1)return path_length+1;
                     }
                 }
             }
