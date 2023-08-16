@@ -11,15 +11,17 @@ public:
         vector<vector<int>>distance(n,vector<int>(m,1e7));    
         distance[0][0] = 0;
 
-        queue<pair<int,pair<int,int>>>q;
+        priority_queue<pair<int,pair<int,int>>,vector<pair<int,pair<int,int>>>,greater<pair<int,pair<int,int>>>>q;
         q.push({0,{0,0}});
 
         while(q.size() > 0)
         {
-            auto it = q.front();   q.pop();
+            auto it = q.top();   q.pop();
             int dist = it.first;
             int x = it.second.first;
             int y = it.second.second;
+
+            if(x == n-1 && y == m-1)return dist;
 
             for(int i = 0 ; i < 4 ; i++)
             {
