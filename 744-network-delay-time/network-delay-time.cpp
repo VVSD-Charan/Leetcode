@@ -21,6 +21,8 @@ public:
             int dist = i.first;
             int node = i.second;
 
+            if(distance[node] < dist)continue;
+
             for(auto it : adj[node])
             {
                 if(distance[it.first] > it.second + dist)
