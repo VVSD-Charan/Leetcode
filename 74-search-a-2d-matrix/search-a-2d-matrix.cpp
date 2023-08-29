@@ -31,6 +31,7 @@ public:
                 }
 
                 if(matrix[i][lo] == target || matrix[i][hi] == target)return true;
+                return false;
             }
         }    
 
