@@ -11,11 +11,11 @@ public:
 
             if(matrix[row][col] > target)
             {
-                row--;
+                row = row - 1;
             }
             else
             {
-                col++;
+                col = col + 1;
             }
         }
 
