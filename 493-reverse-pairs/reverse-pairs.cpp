@@ -28,6 +28,7 @@ class Solution {
        {
            arr[i + lo] = temp[i];
        }
+       temp.clear();
     }
 
     void compare(vector<int>&arr,int lo,int mid,int hi)
