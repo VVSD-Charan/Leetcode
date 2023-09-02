@@ -4,31 +4,33 @@ class Solution {
 
     void mergeArrays(vector<int>&arr,int lo,int mid,int hi)
     {
-       vector<int>temp;
+       int *a = new int[hi - lo + 1];
 
        int i = lo;
        int j = mid + 1;
+       int idx = 0;
 
        while(i <= mid && j <= hi)
        {
            if(arr[i] > arr[j])
            {
-               temp.push_back(arr[j++]);
+               a[idx++] = arr[j++];
            }
            else
            {
-               temp.push_back(arr[i++]);
+               a[idx++] = arr[i++];
            }
        }
 
-       while(i <= mid)temp.push_back(arr[i++]);
-       while(j <= hi)temp.push_back(arr[j++]);
+       while(i <= mid)a[idx++] = arr[i++];
+       while(j <= hi)a[idx++] = arr[j++];
 
-       for(int i = 0 ; i < temp.size() ; i++)
+       for(int i = 0 ; i < hi - lo + 1 ; i++)
        {
-           arr[i + lo] = temp[i];
+           arr[i + lo] = a[i];
        }
-       temp.clear();
+
+       delete []a;
     }
 
     void compare(vector<int>&arr,int lo,int mid,int hi)
