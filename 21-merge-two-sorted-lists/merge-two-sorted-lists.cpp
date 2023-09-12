@@ -20,7 +20,7 @@ public:
         ListNode* l1 = list1;
         ListNode* l2 = list2;
 
-        while(l1 && l2)
+        while(l1!=NULL && l2!=NULL)
         {
             if(l1->val > l2->val)
             {
