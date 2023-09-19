@@ -11,13 +11,13 @@
  */
 class Solution {
 
-    bool validate(TreeNode* root,long long mini,long long maxi)
+    bool validate(TreeNode* root,long mini,long maxi)
     {
         if(root == NULL)return true;
         if(root->val <= mini || root->val >= maxi)return false;
 
-        bool l = validate(root->left,mini,(long long)root->val);
-        bool r = validate(root->right,(long long)root->val,maxi);
+        bool l = validate(root->left,mini,(long)root->val);
+        bool r = validate(root->right,(long)root->val,maxi);
 
         return (l && r);
     }
@@ -25,8 +25,8 @@ class Solution {
 public:
     bool isValidBST(TreeNode* root) 
     {
-        long long max_possib = LLONG_MAX;
-        long long min_possib = LLONG_MIN;
+        long max_possib = LONG_MAX;
+        long min_possib = LONG_MIN;
 
         return validate(root,min_possib,max_possib);
     }
