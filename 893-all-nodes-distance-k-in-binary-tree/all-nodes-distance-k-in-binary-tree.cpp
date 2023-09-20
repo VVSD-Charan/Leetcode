@@ -9,12 +9,12 @@
  */
 class Solution {
 
-    void dfs(TreeNode* root,map<TreeNode*,TreeNode*>&parent)
+    void dfs(TreeNode* root,map<int,TreeNode*>&parent)
     {
         if(root == NULL)return;
 
-        if(root->left)parent[root->left]=root;
-        if(root->right)parent[root->right]=root;
+        if(root->left)parent[root->left->val]=root;
+        if(root->right)parent[root->right->val]=root;
 
         dfs(root->left,parent);
         dfs(root->right,parent);
@@ -25,9 +25,9 @@ public:
     {
         if(root == NULL || target == NULL)return {};
 
-        map<TreeNode*,TreeNode*>parent;
+        map<int,TreeNode*>parent;
         set<int>s;  s.insert(target->val);
-        parent[root] = NULL;
+        parent[root->val] = NULL;
         dfs(root,parent);
 
         queue<TreeNode*>q;  q.push(target);
@@ -54,10 +54,10 @@ public:
                     q.push(node->right);
                 }
 
-                if(parent[node] && s.find(parent[node]->val) == s.end())
+                if(parent[node->val] && s.find(parent[node->val]->val) == s.end())
                 {
-                    s.insert(parent[node]->val);
-                    q.push(parent[node]);
+                    s.insert(parent[node->val]->val);
+                    q.push(parent[node->val]);
                 }
             }
 
