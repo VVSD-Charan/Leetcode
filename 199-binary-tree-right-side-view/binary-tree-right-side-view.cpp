@@ -18,12 +18,12 @@ public:
         queue<TreeNode*>q;  q.push(root);
         vector<int>right;
 
-        while(q.size())
+        while(q.size() > 0)
         {
             int nodes = q.size();   
             int last_node = -1;
 
-            while(nodes--)
+            while(nodes-- > 0)
             {
                 TreeNode* node = q.front(); q.pop();
                 last_node = node->val;
