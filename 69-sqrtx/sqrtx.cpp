@@ -3,7 +3,7 @@ public:
     int mySqrt(int x) 
     {
         int lo = 0;
-        int hi = 1e5;
+        int hi = 46340;
 
         while(hi - lo > 1)
         {
@@ -23,7 +23,7 @@ public:
         }
 
         long long pro = ((long long)hi)*((long long)hi);
-        if(pro == x)return hi;
+        if(pro <= x)return hi;
         return lo;
     }
 };
