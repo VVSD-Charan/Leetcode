@@ -44,10 +44,10 @@ public:
             int target = k + nums[i];
 
             int l_index = searchLeft(nums,i+1,nums.size()-1,target);
-            int r_index = searchRight(nums,i+1,nums.size()-1,target);
-
-            if(l_index != -1 && r_index != -1)
+            
+            if(l_index != -1)
             {
+                int r_index = searchRight(nums,i+1,nums.size()-1,target);
                 count_pairs += (r_index - l_index + 1);
             }
         }
