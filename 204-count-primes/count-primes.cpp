@@ -11,6 +11,8 @@ public:
             {
                 counter++;
 
+                if(i > sqrt(n))continue;
+
                 for(long j = (long)i*(long)i ; j < n ; j+=i)
                 {
                     coprime[j] = true;
