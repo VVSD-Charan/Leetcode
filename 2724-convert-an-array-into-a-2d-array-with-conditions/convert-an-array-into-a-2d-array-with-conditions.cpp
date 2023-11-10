@@ -4,23 +4,24 @@ public:
     {
         vector<vector<int>>arr;
 
-        set<int>s;
+        queue<int>q;
         map<int,int>mp;
 
         for(auto it : nums)
         {
             mp[it]++;
-            s.insert(it);
+
+            if(mp[it] == 1)q.push(it);
         }    
 
-        while(s.size() > 0)
+        while(q.size() > 0)
         {
-            int elements = s.size();
+            int elements = q.size();
             vector<int>row;
 
             while(elements--)
             {
-                int num = *(s.begin());  s.erase(s.begin());
+                int num = q.front(); q.pop();
                 row.push_back(num);
 
                 mp[num]--;
@@ -30,7 +31,7 @@ public:
             arr.push_back(row);
             for(auto it = mp.begin() ; it != mp.end() ; it++)
             {
-                s.insert(it->first);
+                q.push(it->first);
             }
         }
 
