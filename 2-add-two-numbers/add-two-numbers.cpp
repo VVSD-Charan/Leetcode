@@ -10,59 +10,71 @@
  */
 class Solution {
 public:
-    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2)
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) 
     {
-        if(!l1)return l2;
-        if(!l2)return l1;
+        if(l1 == NULL)return l2;
+        if(l2 == NULL)return l1;
 
-        ListNode* head = NULL;
-        ListNode* ptr = head;
+        //Head and tail of new linked list
+        ListNode* new_head = NULL;
+        ListNode* tail = NULL;
+
+        // Temporary pointers to make sure we donot lose lists
+        ListNode* ptr1 = l1;
+        ListNode* ptr2 = l2;
 
         int carry = 0;
 
-        while(l1 && l2)
+        while(ptr1 && ptr2)
         {
-            int sum = l1->val + l2->val + carry;
+            int sum = ptr1->val + ptr2->val + carry;
+            carry = (sum / 10);
+            sum = (sum % 10);
 
-            if(!head)
+            if(new_head == NULL)
             {
-                head = new ListNode(sum%10);
-                ptr = head;
+                new_head = new ListNode(sum);
+                tail = new_head;
             }
             else
             {
-                ptr->next = new ListNode(sum%10);
-                ptr = ptr->next;
+                tail -> next = new ListNode(sum);
+                tail = tail -> next;
             }
 
-            carry = sum/10;
-            l1=l1->next;
-            l2=l2->next;
+            ptr1 = ptr1->next;
+            ptr2 = ptr2->next;
         }
 
-        while(l1)
+        while(ptr1)
         {
-            int sum = l1->val + carry;
-            ptr->next = new ListNode(sum%10);
-            ptr = ptr->next;
-            carry = sum/10;
-            l1=l1->next;
+            int sum = ptr1->val + carry;
+            carry = (sum / 10);
+            sum = (sum % 10);
+
+            tail -> next = new ListNode(sum);
+            tail = tail->next;
+            ptr1 = ptr1->next;
         }
 
-        while(l2)
+        while(ptr2)
         {
-            int sum = l2->val + carry;
-            ptr->next = new ListNode(sum%10);
-            ptr = ptr->next;
-            carry = sum/10;
-            l2=l2->next;
+            int sum = ptr2->val + carry;
+            carry = (sum / 10);
+            sum = (sum % 10);
+
+            tail -> next = new ListNode(sum);
+            tail = tail -> next;
+            ptr2 = ptr2 -> next;
         }
 
         if(carry > 0)
         {
-            ptr->next = new ListNode(carry);
+            tail->next = new ListNode(carry);
         }
 
-        return head;
+        return new_head;
     }
 };
+
+// TC : O(n) and SC : O(1)
