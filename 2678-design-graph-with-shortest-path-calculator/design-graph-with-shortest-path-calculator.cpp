@@ -6,25 +6,30 @@ class Graph {
         vector<int>distance(adj.size(),1e9);
         distance[src] = 0;
 
-        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
-        pq.push({0,src});
+        set<pair<int,int>>s;
+        s.insert({0,src});
 
-        while(pq.size() > 0)
+        while(s.size())
         {
-            int node = pq.top().second;
-            int dist = pq.top().first;  pq.pop();
+            auto it = *(s.begin());    s.erase(s.begin());
+            int node = it.second;
+            int dist = it.first;
 
-            for(auto it : adj[node])
+            if(node == dest)return dist;
+
+            for(auto i : adj[node])
             {
-                if(distance[it.first] > dist + it.second)
+                if(distance[i.first] > i.second + dist)
                 {
-                    distance[it.first] = dist + it.second;
-                    pq.push({distance[it.first],it.first});
+                    if(distance[i.first] != 1e9)s.erase({distance[i.first],i.first});
+
+                    distance[i.first] = i.second + dist;
+                    s.insert({distance[i.first],i.first});
                 }
             }
         }
 
-        return distance[dest];
+        return -1;
     }
 
 public:
@@ -44,9 +49,7 @@ public:
     
     int shortestPath(int node1, int node2) 
     {
-        int shortest = dijkstra(node1,node2,adj);    
-
-        return (shortest < 1e9 ? shortest : -1);
+       return dijkstra(node1,node2,adj);    
     }
 };
 
