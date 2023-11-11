@@ -5,7 +5,7 @@ class Graph {
     //Dijkstra's algorithm for shortest path using set
     int dijkstra(int src,int dest,vector<vector<pair<int,int>>>&adj)
     {
-        vector<int>distance(adj.size(),1e9);
+        vector<int>distance(adj.size(),1e8);
         distance[src] = 0;
 
         set<pair<int,int>>s;
@@ -23,7 +23,7 @@ class Graph {
             {
                 if(distance[i.first] > i.second + dist)
                 {
-                    if(distance[i.first] != 1e9)s.erase({distance[i.first],i.first});
+                    if(distance[i.first] != 1e8)s.erase({distance[i.first],i.first});
 
                     distance[i.first] = i.second + dist;
                     s.insert({distance[i.first],i.first});
