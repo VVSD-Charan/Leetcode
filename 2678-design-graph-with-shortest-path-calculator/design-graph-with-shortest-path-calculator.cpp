@@ -1,6 +1,8 @@
 class Graph {
+    //Adjacency list
     vector<vector<pair<int,int>>>adj;
 
+    //Dijkstra's algorithm for shortest path using set
     int dijkstra(int src,int dest,vector<vector<pair<int,int>>>&adj)
     {
         vector<int>distance(adj.size(),1e9);
@@ -33,6 +35,8 @@ class Graph {
     }
 
 public:
+
+    // Resize adjacency list to n nodes 
     Graph(int n, vector<vector<int>>& edges) {
         adj.resize(n);
 
@@ -42,11 +46,13 @@ public:
         }
     }
     
+    // Adding edge to existing adjacency list 
     void addEdge(vector<int> edge) 
     {
         adj[edge[0]].push_back({edge[1],edge[2]});
     }
     
+    //Find shortest path using Dijkstra's algorithms
     int shortestPath(int node1, int node2) 
     {
        return dijkstra(node1,node2,adj);    
