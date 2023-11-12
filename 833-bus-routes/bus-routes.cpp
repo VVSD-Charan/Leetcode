@@ -2,7 +2,7 @@ class Solution {
 public:
     int numBusesToDestination(vector<vector<int>>& routes, int source, int target) 
     {
-        unordered_map<int,vector<int>>index;
+        map<int,vector<int>>index;
 
         for(int i = 0 ; i < routes.size() ; i++)
         {
@@ -12,7 +12,7 @@ public:
             }
         }
 
-        set<int>visitedIndex;
+        vector<bool>visitedIndex(routes.size(),false);
         queue<int>q;    q.push(source);
 
         int buses = 0;
@@ -29,9 +29,9 @@ public:
 
                 for(auto i : index[node])
                 {
-                    if(visitedIndex.find(i) == visitedIndex.end())
+                    if(!visitedIndex[i])
                     {
-                        visitedIndex.insert(i);
+                        visitedIndex[i] = true;
 
                         for(auto it : routes[i])
                         {
