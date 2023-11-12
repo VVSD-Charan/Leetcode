@@ -4,6 +4,7 @@ public:
     {
         map<int,vector<int>>index;
 
+        //Maintain index map to store the index of each route
         for(int i = 0 ; i < routes.size() ; i++)
         {
             for(auto it : routes[i])
@@ -12,11 +13,13 @@ public:
             }
         }
 
+        //It is un-necessary to visit same index multiple times so use visitedIndex array
         vector<bool>visitedIndex(routes.size(),false);
         queue<int>q;    q.push(source);
 
         int buses = 0;
 
+        //Perform level order traversal on indices which are not visited
         while(q.size())
         {
             int nodes = q.size();
@@ -44,6 +47,7 @@ public:
             buses++;
         }    
 
+        //Since destination is not reachable return -1
         return -1;
     }
 };
