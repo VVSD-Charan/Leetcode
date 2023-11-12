@@ -4,7 +4,7 @@ public:
     {
         map<int,vector<int>>index;
 
-        //Maintain index map to store the index of each route
+        //Maintain index map to store the indices at which stops are present
         for(int i = 0 ; i < routes.size() ; i++)
         {
             for(auto it : routes[i])
