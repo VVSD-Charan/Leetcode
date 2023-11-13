@@ -32,7 +32,7 @@ public:
         {
             if(isVowel(s[i]))
             {
-                s[i] = v[idx++];
+                s[i] = v[idx];  idx++;
             }
         }
 
