@@ -1,11 +1,5 @@
 class Solution {
 
-    int min(int a,int b)
-    {
-        if(a > b)return b;
-        return a;
-    }
-
 public:
     int minimumSum(vector<int>& nums) 
     {
@@ -14,7 +8,7 @@ public:
         vector<int>prefix(n);
         vector<int>suffix(n);
 
-        int ans = INT_MAX;
+        int ans = 1e9;
 
         prefix[0] = nums[0];
         suffix[n-1] = nums[n-1];
@@ -33,7 +27,7 @@ public:
             }
         }
 
-        if(ans == INT_MAX)return -1;
+        if(ans == 1e9)return -1;
         return ans;
     }
 };
