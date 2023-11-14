@@ -1,4 +1,11 @@
 class Solution {
+
+    int min(int a,int b)
+    {
+        if(a > b)return b;
+        return a;
+    }
+
 public:
     int minimumSum(vector<int>& nums) 
     {
