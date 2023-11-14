@@ -15,12 +15,8 @@ public:
         for(int i = 1 ; i < n ; i++)
         {
             prefix[i] = min(prefix[i-1],nums[i]);
+            suffix[n-i-1] = min(suffix[n-i],nums[n-i-1]);
         }    
-
-        for(int i = n-2 ; i >= 0 ; i--)
-        {
-            suffix[i] = min(suffix[i+1],nums[i]);
-        }
 
         for(int i = 1 ; i < n-1 ; i++)
         {
