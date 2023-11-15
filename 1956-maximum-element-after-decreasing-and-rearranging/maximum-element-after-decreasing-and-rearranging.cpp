@@ -13,6 +13,6 @@ public:
             arr[i] = arr[i-1] + 1;
         }   
 
-        return arr.back();
+        return arr[arr.size()-1];
     }
 };
