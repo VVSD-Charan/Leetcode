@@ -26,7 +26,7 @@ class Solution {
 public:
     string findDifferentBinaryString(vector<string>& nums) 
     {
-        set<string>s;
+        unordered_set<string>s;
 
         for(auto it : nums)
         {
