@@ -23,7 +23,11 @@ public:
         for(auto it : nums)
         {
             int diff = it - rev(it);
-            pairs = (pairs + mp[diff])%mod;
+
+            if(mp.find(diff) != mp.end())
+            {
+                pairs = (pairs + mp[diff])%mod;
+            }
 
             mp[diff]++;
         }
