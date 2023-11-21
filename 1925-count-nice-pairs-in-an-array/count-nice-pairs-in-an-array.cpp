@@ -16,7 +16,7 @@ class Solution {
 public:
     int countNicePairs(vector<int>& nums) 
     {
-        map<int,int>mp;
+        unordered_map<int,int>mp;
         int pairs = 0;
         int mod = 1e9+7;
 
@@ -26,7 +26,7 @@ public:
 
             if(mp.find(diff) != mp.end())
             {
-                pairs = (pairs + (mp[diff]%mod))%mod;
+                pairs = (pairs + mp[diff])%mod;
             }
 
             mp[diff]++;
