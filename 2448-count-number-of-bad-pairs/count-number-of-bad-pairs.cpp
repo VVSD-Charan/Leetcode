@@ -8,7 +8,11 @@ public:
 
         for(int i = 0 ; i < n ; i++)
         {
-            totalPairs -= mp[i - nums[i]];
+            if(mp.find(i-nums[i])!=mp.end())
+            {
+                totalPairs -= mp[i - nums[i]];
+            }
+            
             mp[i-nums[i]]++;
         }    
 
