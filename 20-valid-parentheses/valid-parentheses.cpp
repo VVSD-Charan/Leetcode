@@ -1,12 +1,25 @@
 class Solution {
+
+    bool openBrackets(char ch)
+    {
+        return (ch == '(' || ch == '[' || ch == '{');
+    }
+
+    bool matching(char c1,char c2)
+    {
+        return ((c1 == '(' && c2 == ')') || (c1 == '[' && c2 == ']') || (c1 == '{' && c2 == '}'));
+    }
+
 public:
     bool isValid(string s) 
     {
-        stack< char > st;
+        if((s.length() % 2) == 1)return false;
+
+        stack<char>st;
 
         for(char it : s)
         {
-            if( it == '(' || it == '[' || it == '{')
+            if(openBrackets(it))
             {
                 st.push(it);
             }
@@ -14,7 +27,7 @@ public:
             {
                 if(st.size() == 0)return false;
 
-                if((it == '}' && st.top()=='{') || (it == ']' && st.top()=='[') || (it == ')' && st.top() == '('))
+                if(matching(st.top(),it))
                 {
                     st.pop();
                 }
