@@ -1,58 +1,64 @@
 class MinStack {
 
-    stack<long long>s;
-    long long mini = 1e10;
+    long minElement;
+    stack<long>s;
 
 public:
     MinStack() {
-        
+        minElement = INT_MAX;
     }
     
     void push(int val) 
     {
         if(s.size() == 0)
         {
-            mini = val;
             s.push(val);
+            minElement = val;
             return;
-        }
-
-        if(val > mini)
-        {
-            s.push(val);
         }    
+
+        if(val < minElement)
+        {
+            s.push((long)2*(long)val - minElement);
+            minElement = val;
+        }
         else
         {
-            long long x = (long long)((long long)2*val) - mini;
-            s.push(x);
-            mini = val;
+            s.push(val);
         }
     }
     
     void pop() 
     {
-        if(s.size() == 0)return;
-
-        if(s.top() < mini)
+        if(s.size() == 1)
         {
-            mini = 2*mini*1LL - s.top();
+            s.pop();
+            return;
         }    
 
-        s.pop();
+        if(s.top() < minElement)
+        {
+            minElement = (long)2*(long)minElement - s.top();
+            s.pop();
+        }
+        else
+        {
+            s.pop();
+        }
     }
     
     int top() 
     {
-        if(s.size() == 0)return 0;
-
-        if(s.top() < mini)return mini;
+        if(s.top() < minElement)
+        {
+            return minElement;
+        }    
         return s.top();
     }
     
     int getMin() 
     {
-        if(s.size() == 0)return -1;
-        return mini;    
+        return minElement;    
     }
 };
 
