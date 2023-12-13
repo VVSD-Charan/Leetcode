@@ -14,34 +14,43 @@ public:
     vector<vector<int>> zigzagLevelOrder(TreeNode* root) 
     {
         if(root == NULL)return {};
-        vector<vector<int>>ans;
 
-        queue<TreeNode*>q;  q.push(root);
-        int level = 0;
+        vector<vector<int>>arr;
 
-        while(q.size())
+        stack<TreeNode*>s1;
+        stack<TreeNode*>s2;    
+
+        s1.push(root);
+
+        while(s1.size() > 0 || s2.size() > 0)
         {
-            int nodes = q.size();
-            vector<int>arr;
+            vector<int>odd_level;
+            vector<int>even_level;
 
-            while(nodes--)
+            while(s1.size() > 0)
             {
-                TreeNode* node = q.front(); q.pop();
-                arr.push_back(node->val);
+                TreeNode* node = s1.top();  s1.pop();
 
-                if(node->left)q.push(node->left);
-                if(node->right)q.push(node->right);
+                odd_level.push_back(node->val);
+
+                if(node->left)s2.push(node->left);
+                if(node->right)s2.push(node->right);
             }
 
-            if((level % 2) == 1)
+            while(s2.size() > 0)
             {
-                reverse(arr.begin(),arr.end());
+                TreeNode* node = s2.top();  s2.pop();
+
+                even_level.push_back(node->val);
+
+                if(node->right)s1.push(node->right);
+                if(node->left)s1.push(node->left);
             }
 
-            ans.push_back(arr);
-            level++;
+            if(odd_level.size() > 0)arr.push_back(odd_level);
+            if(even_level.size() > 0)arr.push_back(even_level);
         }
 
-        return ans;
+        return arr;
     }
 };
