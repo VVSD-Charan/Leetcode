@@ -4,26 +4,27 @@ public:
     {
         stack<int>s;
 
-        for(int i = 0 ; i < asteroids.size() ; i++)
+
+        for(auto it : asteroids)
         {
-            if(asteroids[i] > 0)
+            if(it > 0)
             {
-                s.push(asteroids[i]);
+                s.push(it);
             }
             else
             {
-                while(s.size() > 0 && s.top() > 0 && s.top() < abs(asteroids[i]))
+                while(s.size() > 0 && s.top() > 0 && s.top() < abs(it))
                 {
                     s.pop();
                 }
 
-                if(s.size() == 0 || s.top() < 0)
-                {
-                    s.push(asteroids[i]);
-                }
-                else if(s.top() == abs(asteroids[i]))
+                if(s.size() > 0 && s.top() == abs(it))
                 {
                     s.pop();
+                }
+                else if((s.size() > 0 && s.top() < 0) || (s.size() == 0))
+                {
+                    s.push(it);
                 }
             }
         }
