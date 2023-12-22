@@ -1,24 +1,4 @@
 class Solution {
-
-    string removeLeading(string &s)
-    {
-        string str = "";
-        int idx = 0;
-
-        while(idx < s.length() && s[idx] == '0')
-        {
-            idx++;
-        }
-        
-        for(int i = idx ; i < s.length() ; i++)
-        {
-            str.push_back(s[i]);
-        }
-
-        if(str.size() == 0)return "0";
-        return str;
-    }
-
 public:
     string removeKdigits(string num, int k) 
     {
@@ -32,25 +12,26 @@ public:
                 k--;
             }
             st.push(num[i]);
+
+            if(st.size() == 1 && st.top()=='0')st.pop();
         }    
 
         while(st.size()>0 && k>0)
         {
-            st.pop();
-            k--;
+            st.pop();   k--;
         }
 
-        if(st.size() == 0)return "0";
-
-        string res(st.size(),'0');
-        int idx = st.size()-1;
+        string res = "";
 
         while(st.size()>0)
         {
-            res[idx--]=st.top();
+            res += st.top();
             st.pop();
         }
 
-        return removeLeading(res);
+        if(res.size() == 0)return "0";
+        
+        reverse(res.begin(),res.end());
+        return res;
     }
 };
