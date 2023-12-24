@@ -34,8 +34,7 @@ public:
         //If key already exists remove it
         if(keyValue.find(key) != keyValue.end())
         {
-            list<int>::iterator it = getAddress[key];
-            linked_list.erase(it);
+            linked_list.erase(getAddress[key]);
             getAddress.erase(key);
             keyValue.erase(key);
 
