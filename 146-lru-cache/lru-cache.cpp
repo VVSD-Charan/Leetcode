@@ -18,8 +18,7 @@ public:
         if(keyValue.find(key) == keyValue.end())return -1;
 
         //Remove node
-        list<int>::iterator it = getAddress[key];
-        linked_list.erase(it);
+        linked_list.erase(getAddress[key]);
 
         //Add node to front
         linked_list.push_front(key);
