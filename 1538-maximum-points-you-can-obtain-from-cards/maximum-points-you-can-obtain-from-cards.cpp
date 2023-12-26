@@ -17,13 +17,13 @@ public:
 
         while(lo >= 0)
         {
-            total_sum -= cardPoints[lo];
-            total_sum += cardPoints[hi];
+            total_sum = total_sum - cardPoints[lo];
+            total_sum = total_sum + cardPoints[hi];
 
             max_sum = max(max_sum,total_sum);
 
-            lo--;
-            hi--;
+            lo = lo-1;
+            hi = hi-1;
         }
 
         return max_sum;
