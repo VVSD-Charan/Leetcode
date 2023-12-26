@@ -1,6 +1,6 @@
 class Solution {
 
-    int atMost(vector<int>&arr,int k,int n)
+    int atMost(vector<int>&arr,int k,int &n)
     {
         unordered_map<int,int>mp;
 
