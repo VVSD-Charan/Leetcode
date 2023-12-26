@@ -1,6 +1,6 @@
 class Solution {
 
-    int atMost(string &s,int k)
+    int atMost(string &s,int k,int &n)
     {
         int total_strings = 0;
         int lo = 0;
@@ -8,7 +8,7 @@ class Solution {
 
         unordered_map<char,int>mp;
 
-        while(hi < s.length())
+        while(hi < n)
         {
             mp[s[hi]]++;
 
@@ -34,6 +34,7 @@ class Solution {
 public:
     int numberOfSubstrings(string s) 
     {
-        return (atMost(s,3) - atMost(s,2));    
+        int n = s.length();
+        return (atMost(s,3,n) - atMost(s,2,n));    
     }
 };
