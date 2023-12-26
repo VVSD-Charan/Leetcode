@@ -14,14 +14,14 @@ class Solution {
             while(lo < hi && total_odd > k)
             {
                 total_odd -= (arr[lo]%2);
-                lo++;
+                lo = lo + 1;
             }
 
             if(total_odd <= k)
             {
                 total_arrays += (hi-lo+1);
             }
-            hi++;
+            hi = hi + 1;
         }
 
         return total_arrays;
