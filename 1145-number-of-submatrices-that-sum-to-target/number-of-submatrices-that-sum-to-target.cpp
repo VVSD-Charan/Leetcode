@@ -10,16 +10,16 @@ class Solution {
 
         for(int i = 0 ; i < row.size() ; i++)
         {
-            curr_sum += row[i];
+            curr_sum = curr_sum + row[i];
 
             if(curr_sum == target)
             {
-                total_arrays++;
+                total_arrays = total_arrays + 1;
             }
 
             if(mp.find(curr_sum - target) != mp.end())
             {
-                total_arrays += mp[curr_sum - target];
+                total_arrays = total_arrays + mp[curr_sum - target];
             }
 
             mp[curr_sum]++;
@@ -39,10 +39,10 @@ class Solution {
             {
                 for(int i = 0 ; i < r ; i++)
                 {
-                    row_sum[i] += matrix[i][right_col];
+                    row_sum[i] = row_sum[i] + matrix[i][right_col];
                 }
 
-                total_matrices += numberTarget(row_sum,target);
+                total_matrices = total_matrices + numberTarget(row_sum,target);
             }
         }
 
@@ -61,10 +61,10 @@ class Solution {
             {
                 for(int i = 0 ; i < c ; i++)
                 {
-                    col_sum[i] += matrix[last_row][i];
+                    col_sum[i] = col_sum[i] + matrix[last_row][i];
                 }
 
-                total_matrices += numberTarget(col_sum,target);
+                total_matrices = total_matrices + numberTarget(col_sum,target);
             }
         }
 
