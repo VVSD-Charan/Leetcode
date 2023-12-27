@@ -3,7 +3,7 @@ public:
     int subarraySum(vector<int>& nums, int k) 
     {
         int curr_sum = 0;
-        map<int,int>mp;
+        unordered_map<int,int>mp;
 
         int total_arrays = 0;
 
