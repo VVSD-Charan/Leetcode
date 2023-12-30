@@ -34,7 +34,7 @@ public:
         ListNode* head = NULL;
         ListNode* tail = NULL;
 
-        while(pq.size() > 0)
+        while(pq.size())
         {
             ListNode* node = pq.top();  pq.pop();
             if(node->next)pq.push(node->next);
