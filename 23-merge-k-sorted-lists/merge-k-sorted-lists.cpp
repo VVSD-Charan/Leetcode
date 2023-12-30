@@ -37,19 +37,20 @@ public:
         while(pq.size() > 0)
         {
             ListNode* node = pq.top();  pq.pop();
+            if(node->next)pq.push(node->next);
+
+            node->next = NULL;
 
             if(head == NULL)
             {
-                head = new ListNode(node->val);
+                head = node;
                 tail = head;
             }
             else
             {
-                tail->next = new ListNode(node->val);
+                tail->next = node;
                 tail = tail->next;
             }
-
-            if(node->next)pq.push(node->next);
         }
 
         return head;
