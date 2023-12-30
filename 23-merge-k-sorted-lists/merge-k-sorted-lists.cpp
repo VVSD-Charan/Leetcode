@@ -8,12 +8,14 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+
 class cmp
 {
     public :
 
-    bool operator()(ListNode* a,ListNode* b){
-        return a->val > b->val;
+    bool operator()(ListNode* l1,ListNode* l2)
+    {
+        return (l1->val > l2->val);
     }
 };
 
@@ -22,13 +24,11 @@ public:
     ListNode* mergeKLists(vector<ListNode*>& lists) 
     {
         priority_queue<ListNode*,vector<ListNode*>,cmp>pq;
-        
+
         for(auto it : lists)
         {
-            if(it != NULL)
-            {
-                pq.push(it);
-            }
+            if(it == NULL)continue;
+            pq.push(it);
         }
 
         ListNode* head = NULL;
@@ -45,13 +45,11 @@ public:
             }
             else
             {
-                tail -> next = new ListNode(node->val);
-                tail = tail -> next;
+                tail->next = new ListNode(node->val);
+                tail = tail->next;
             }
 
-            node = node -> next;
-
-            if(node)pq.push(node);
+            if(node->next)pq.push(node->next);
         }
 
         return head;
