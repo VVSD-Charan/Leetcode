@@ -33,16 +33,16 @@ public:
                 temp_tasks.push_back(pq.top());
                 pq.pop();
 
-                empty_slots--;
-                filled_slots++;
+                empty_slots = empty_slots - 1;
+                filled_slots = filled_slots + 1;
             }
 
-            total_time += filled_slots;
+            total_time = total_time + filled_slots;
 
-            for(auto it : temp_tasks)
+            for(int i = 0 ; i < filled_slots ; i++)
             {
-                if(it == 1)continue;
-                pq.push(it-1);
+                if(temp_tasks[i] == 1)continue;
+                pq.push(temp_tasks[i]-1);
             }
 
             if(pq.size() > 0)total_time += empty_slots;
