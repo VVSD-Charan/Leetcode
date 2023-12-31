@@ -1,29 +1,23 @@
 class Solution {
 public:
-    int maxLengthBetweenEqualCharacters(string s) {
-        int max_length = -1;
+    int maxLengthBetweenEqualCharacters(string s) 
+    {
+        vector<int>min_index(26,-1);
 
-        vector<int>arr(26,-1);
+        int ans = -1;
 
-        int hi = 0;
-        int n = s.length();
-
-        while(hi < n)
+        for(int i = 0 ; i < s.length() ; i++)
         {
-            if(arr[s[hi]-'a'] == -1)
+            if(min_index[s[i]-'a'] == -1)
             {
-                arr[s[hi]-'a'] = hi;
-                hi++;
+                min_index[s[i]-'a'] = i;
             }
             else
             {
-                int diff = hi - arr[s[hi]-'a'] - 1;
-
-                max_length = max(max_length,diff);
-                hi++;
+                ans = max(ans,i-min_index[s[i]-'a']-1);
             }
-        }
+        }   
 
-        return max_length;
+        return ans;
     }
 };
