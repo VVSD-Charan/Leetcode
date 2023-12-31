@@ -2,7 +2,7 @@ class Solution {
 public:
     bool isNStraightHand(vector<int>& hand, int groupSize) 
     {
-        multiset<int>ms;
+        map<int,int>mp;
 
         int n = hand.size();
         int m = groupSize;
@@ -11,19 +11,18 @@ public:
 
         for(int i = 0 ; i < n ; i++)
         {
-            ms.insert(hand[i]);
+            mp[hand[i]]++;
         }    
 
-        sort(hand.begin(),hand.end());
-
-        for(int i = 0 ; i < n ; i++)
+        for(auto it : mp)
         {
-            if(ms.find(hand[i]) == ms.end())continue;
-
-            for(int j = 0 ; j < m ; j++)
+            while(mp[it.first] > 0)
             {
-                if(ms.find(hand[i]+j) == ms.end())return false;
-                ms.erase(ms.find(hand[i]+j));
+                for(int i = 0 ; i < m ; i++)
+                {
+                    if(mp[i+it.first] == 0)return false;
+                    mp[i+it.first]--;
+                }
             }
         }
 
