@@ -14,17 +14,21 @@ public:
             mp[hand[i]]++;
         }    
 
-        for(auto it : mp)
+        for(auto it = mp.begin() ; it != mp.end() ; it++)
         {
-            while(mp[it.first] > 0)
-            {
-                for(int i = 0 ; i < m ; i++)
-                {
-                    if(mp[i+it.first] == 0)return false;
-                    mp[i+it.first]--;
-                }
-            }
+           int freq = it->second;
+
+           while(freq--)
+           {
+               for(int i = 0 ; i < m ; i++)
+               {
+                   if(mp[i + it->first] == 0)return false;
+                   mp[i + it->first]--;
+               }
+           }
         }
+
+        return true;
 
         return true;
     }
