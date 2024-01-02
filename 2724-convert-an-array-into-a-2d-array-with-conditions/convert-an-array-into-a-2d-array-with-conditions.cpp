@@ -2,39 +2,29 @@ class Solution {
 public:
     vector<vector<int>> findMatrix(vector<int>& nums) 
     {
-        vector<vector<int>>arr;
+        int max_freq = 0;
 
-        queue<int>q;
         map<int,int>mp;
 
-        for(auto it : nums)
+        for(int i = 0 ; i < nums.size() ;  i++)
         {
-            mp[it]++;
-
-            if(mp[it] == 1)q.push(it);
-        }    
-
-        while(q.size() > 0)
-        {
-            int elements = q.size();
-            vector<int>row;
-
-            while(elements--)
-            {
-                int num = q.front(); q.pop();
-                row.push_back(num);
-
-                mp[num]--;
-                if(mp[num] == 0)mp.erase(num);
-            }
-
-            arr.push_back(row);
-            for(auto it = mp.begin() ; it != mp.end() ; it++)
-            {
-                q.push(it->first);
-            }
+            max_freq = max(max_freq,++mp[nums[i]]);
         }
 
-        return arr;
+        vector<vector<int>>matrix(max_freq);
+
+        for(auto it = mp.begin() ; it != mp.end() ; it++)
+        {
+            int row = 0;
+            int freq = it->second;
+
+            while(freq--)
+            {
+                matrix[row].push_back(it->first);
+                row++;
+            }
+        }    
+
+        return matrix;
     }
 };
