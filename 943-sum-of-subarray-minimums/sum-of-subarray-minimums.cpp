@@ -3,69 +3,62 @@ public:
     int sumSubarrayMins(vector<int>& arr) 
     {
         int n = arr.size();
+        int modd = 1e9+7;
 
-        vector<int>prevSmaller(n);
-        vector<int>nextSmaller(n);
+        vector<int>prefix(n);
+        vector<int>suffix(n);
 
-        stack<int>prevs;
+        stack<int>pre;
+        stack<int>next;
 
-        prevSmaller[0] = 1;
-        prevs.push(0);
-
-        for(int i = 1 ; i < n ; i++)
+        for(int i = 0 ; i < n ; i++)
         {
-            while(prevs.size() > 0 && arr[prevs.top()] > arr[i])
+            while(pre.size()>0 && arr[pre.top()] >= arr[i])
             {
-                prevs.pop();
+                pre.pop();
             }
 
-            if(prevs.size() == 0)
+            if(pre.size() == 0)
             {
-                prevSmaller[i] = i+1;
+                prefix[i] = i+1;
             }
             else
             {
-                prevSmaller[i] = i-prevs.top();
+                prefix[i] = i - pre.top();
             }
 
-            prevs.push(i);
-        }
+            pre.push(i);
+        }    
 
-        stack<int>next;
-
-        nextSmaller[n-1] = 1;
-        next.push(n-1);
-        int m = 1e9+7;
-
-        for(int i = n-2 ; i >= 0 ; i--)
+        for(int i = n-1 ; i >= 0 ; i--)
         {
-            while(next.size() > 0 && arr[next.top()] >= arr[i])
+            while(next.size()>0 && arr[next.top()] > arr[i])
             {
                 next.pop();
             }
 
             if(next.size() == 0)
             {
-                nextSmaller[i] = n - i;
+                suffix[i] = n - i;
             }
             else
             {
-                nextSmaller[i] = next.top() - i;
+                suffix[i] = next.top() - i;
             }
 
             next.push(i);
         }
 
-        int total_sum = 0;
+        int sum = 0;
 
         for(int i = 0 ; i < n ; i++)
         {
-            long long product = ((prevSmaller[i] * nextSmaller[i])%m);
-            long long mult = (((long long)arr[i]*product)%m);
+            long long product = (((long long)prefix[i]*(long long)suffix[i])%modd);
+            product = ((product * (long long)arr[i])%modd);
 
-            total_sum = (total_sum + mult)%m;
-        }    
+            sum = (sum + (product%modd))%modd;
+        }
 
-        return total_sum;
+        return sum;
     }
 };
