@@ -1,36 +1,38 @@
 class Solution {
 
-    int dx[4] = {-1,+1,0,0};
-    int dy[4] = {0,0,-1,+1};
+    int di[4] = {-1,+1,0,0};
+    int dj[4] = {0,0,-1,+1};
 
-public:
-
-    int dfs(vector<vector<int>>&matrix,int i,int j,vector<vector<int>>&dp)
+    int f(vector<vector<int>>&matrix,int i,int j,int n,int m,vector<vector<int>>&dp)
     {
         if(dp[i][j] != -1)return dp[i][j];
 
-        int ans = 0;
+        int longest = 1;
 
-        for(int x = 0 ; x < 4 ; x++)
+        for(int k = 0 ; k < 4 ; k++)
         {
-            int cx = i + dx[x];
-            int cy = j + dy[x];
+            int ci = i + di[k];
+            int cj = j + dj[k];
 
-            if(cx >= 0 && cy >= 0 && cx < matrix.size() && cy < matrix[0].size() && matrix[cx][cy] > matrix[i][j])
+            if(ci >= 0 && cj >= 0 && ci < n && cj < m)
             {
-                ans = max(ans , 1 + dfs(matrix,cx,cy,dp));
+                if(matrix[ci][cj] > matrix[i][j])
+                {
+                    longest = max(longest , 1 + f(matrix,ci,cj,n,m,dp));
+                }
             }
         }
 
-        return dp[i][j] = ans;
+        return dp[i][j] = longest;
     }
 
+public:
     int longestIncreasingPath(vector<vector<int>>& matrix) 
     {
-        int max_path = 0;
-
         int n = matrix.size();
         int m = matrix[0].size();
+
+        int max_path = 1;
 
         vector<vector<int>>dp(n,vector<int>(m,-1));
 
@@ -38,12 +40,9 @@ public:
         {
             for(int j = 0 ; j < m ; j++)
             {
-                if(dp[i][j] == -1)
-                {
-                    max_path = max(max_path , 1 + dfs(matrix,i,j,dp));
-                }
+                max_path = max(max_path , f(matrix,i,j,n,m,dp));
             }
-        }
+        }   
 
         return max_path;
     }
