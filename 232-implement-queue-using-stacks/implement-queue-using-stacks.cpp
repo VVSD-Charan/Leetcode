@@ -1,5 +1,5 @@
 class MyQueue {
-
+    
     stack<int>s1;
     stack<int>s2;
 
@@ -8,55 +8,46 @@ public:
         
     }
     
-    void push(int x) 
-    {
-        s1.push(x);    
+    void push(int x) {
+        s1.push(x);
     }
     
-    int pop() 
-    {
-        int lastElement = -1;
-
-        while(s1.size() > 1)
-        {
+    int pop() {
+        while(s1.size() > 1){
             s2.push(s1.top());
             s1.pop();
-        }    
+        }
 
-        lastElement = s1.top(); s1.pop();
+        int number = s1.top();  s1.pop();
 
-        while(s2.size())
-        {
+        while(s2.size()){
             s1.push(s2.top());
             s2.pop();
         }
 
-        return lastElement;
+        return number;
     }
     
-    int peek() 
-    {
-        int lastElement = -1;
+    int peek() {
+        int number = -1;
 
-        while(s1.size())
-        {
+        while(s1.size() > 1){
             s2.push(s1.top());
-            lastElement = s1.top();
             s1.pop();
-        }    
+        }
 
-        while(s2.size())
-        {
+        number = s1.top();
+
+        while(s2.size()){
             s1.push(s2.top());
             s2.pop();
         }
 
-        return lastElement;
+        return number;
     }
     
-    bool empty() 
-    {
-        return (s1.size() == 0);    
+    bool empty() {
+        return (s1.size() == 0);
     }
 };
 
