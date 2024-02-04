@@ -1,13 +1,10 @@
 class Solution {
 
-    bool satisfies(vector<int>&a,vector<int>&b)
+    bool satisfy(vector<int>&a1,vector<int>&a2)
     {
         for(int i = 0 ; i < 60 ; i++)
         {
-            if(b[i] > a[i])
-            {
-                return false;
-            }
+            if(a2[i] > a1[i])return false;
         }
 
         return true;
@@ -17,40 +14,38 @@ public:
     string minWindow(string s, string t) 
     {
         vector<int>s_freq(60,0);
-        vector<int>t_freq(60,0);
+        vector<int>t_freq(60,0);   
 
-        for(auto it : t)
+        for(int i = 0 ; i < t.length() ; i++)
         {
-            t_freq[it-'A']++;
-        }    
+            t_freq[t[i]-'A']++;
+        }
 
-        int lo = 0;
-        int hi = 0;
-        int n = s.length();
+        int index = 0;
+        int start = 0;
+        string str = "";
 
-        string ans = "";
-
-        while(hi < n)
+        while(index < s.length())
         {
-            s_freq[s[hi]-'A']++;
+            s_freq[s[index]-'A']++;
 
-            while(satisfies(s_freq,t_freq) && s_freq[s[lo]-'A']-1 >= t_freq[s[lo]-'A'])
+            if(s_freq[s[index]-'A'] >= t_freq[s[index]-'A'] && satisfy(s_freq,t_freq))
             {
-                s_freq[s[lo]-'A']--;
-                lo++;
-            }
-
-            if(satisfies(s_freq,t_freq))
-            {
-                if(ans == "" || ans.length() > hi-lo+1)
+                while(start < s.length() && s_freq[s[start]-'A'] > t_freq[s[start]-'A'])
                 {
-                    ans = s.substr(lo,hi-lo+1);
+                    s_freq[s[start]-'A']--;
+                    start = start + 1;
+                }
+
+                if(str.length() == 0 || index - start + 1 < str.length())
+                {
+                    str = s.substr(start,index-start+1);
                 }
             }
 
-            hi++;
+            index++;
         }
 
-        return ans;
+        return str;
     }
 };
