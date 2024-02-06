@@ -6,24 +6,22 @@ public:
 
         for(int i = 0 ; i < strs.size() ; i++)
         {
-            string temp = strs[i];
-            sort(temp.begin(),temp.end());
+            string str = strs[i];
+            sort(str.begin(),str.end());
 
-            mp[temp].push_back(strs[i]);
-        }
+            mp[str].push_back(strs[i]);
+        }    
 
         vector<vector<string>>arr;
 
-        for(auto it = mp.begin() ; it != mp.end() ; it++)
+        for(auto it : mp)
         {
-            vector<string>curr;
-
-            for(auto i : it->second)
+            vector<string>temp;
+            for(auto i : it.second)
             {
-                curr.push_back(i);
+                temp.push_back(i);
             }
-
-            arr.push_back(curr);
+            arr.push_back(temp);
         }
 
         return arr;
