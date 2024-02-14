@@ -1,68 +1,62 @@
 class Solution {
 public:
-    string longestPalindrome(string s)
+    string longestPalindrome(string s) 
     {
-        if(s.length()==1)return s;
-        string longest_palindrome = s.substr(0,1);
+        string res = "";
+        int n = s.length();
 
-        //Check for odd length substrings
-        for(int i=1;i<s.length();i++)
+        //Odd length substrings
+        for(int i = 0 ; i < n ; i++)
         {
-            string str = "";
             int lo = i-1;
             int hi = i+1;
 
-            while(lo>=0 && hi<s.length())
+            string temp = "";
+
+            while(lo >= 0 && hi < n && s[lo] == s[hi])
             {
-                if(s[hi]==s[lo])
-                {
-                    str.push_back(s[lo]);
-                    lo--;   hi++;
-                }
-                else
-                {
-                    break;
-                }
+                temp += s[lo];
+                lo = lo - 1;
+                hi = hi + 1;
             }
 
-            if(2*str.length()+1 > longest_palindrome.length())
-            {
-                string revstr = str;
-                reverse(revstr.begin(),revstr.end());
-                longest_palindrome = revstr + s.substr(i,1) + str; 
-            }
-        }
+            int len = 2*temp.size() + 1;
 
-        //Check for even length palindromes
-        for(int i=1 ;i<s.length();i++)
+            if(len > res.length())
+            {
+                string rev_temp = temp;
+                reverse(rev_temp.begin(),rev_temp.end());
+
+                res = rev_temp + s[i] + temp;
+            }
+        }    
+
+        //Even length substrings
+        for(int i = 0 ; i < n ; i++)
         {
-            if(s[i]!=s[i-1])continue;
+            int lo = i-1;
+            int hi = i;
+            
+            string temp = "";
 
-            string str = s.substr(i,1);
-            int lo = i-2;
-            int hi = i+1;
-
-            while(lo>=0 && hi<s.length())
+            while(lo >= 0 && hi < n && s[lo] == s[hi])
             {
-                if(s[lo]==s[hi])
-                {
-                    str.push_back(s[lo]);
-                    lo--;   hi++;
-                }
-                else
-                {
-                    break;
-                }
+                temp += s[lo];
+                lo = lo - 1;
+                hi = hi + 1;
             }
 
-            if(2*str.length() > longest_palindrome.length())
+            int len = 2*temp.length();
+
+            if(len > res.length())
             {
-                string res = str;
-                reverse(res.begin(),res.end());
-                longest_palindrome = res + str;
+                string rev_temp = temp;
+                reverse(rev_temp.begin(),rev_temp.end());
+
+                res = rev_temp + temp;
             }
         }
 
-        return longest_palindrome;
+        return res;
     }
 };
