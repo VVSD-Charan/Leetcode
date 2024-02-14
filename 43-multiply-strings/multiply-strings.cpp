@@ -40,31 +40,24 @@ public:
 
         // Store sum of individual products into string
         string res = "";
-        int index = 0;
         int carry = 0;
-        bool done = false;
+        int max_len = 0;
 
-        while(!done)
-        {
-            int counter = 0;
+        for(int i = 0 ; i < arr.size() ; i++){
+            max_len = max(max_len,(int)arr[i].size());
+        }
+
+        for(int i = 0 ; i < max_len ; i++){
             int sum = carry;
-            for(int i = 0 ; i < arr.size() ; i++)
-            {
-                if(index >= arr[i].size())continue;
-                counter = counter + 1;
-                sum = sum + arr[i][index];
+            for(int j = 0 ; j < arr.size() ; j++){
+                if(arr[j].size() <= i)continue;
+                sum = sum + arr[j][i];
             }
-
-            if(counter == 0)done = true;
-            else{
-                res.push_back((sum % 10) + '0');
-                carry = (sum / 10);
-                index++;
-            }
+            res.push_back((sum % 10)+'0');
+            carry = (sum / 10);
         }
 
         if(carry > 0)res.push_back(carry+'0');
-
         if(res.length() == 0)return "0";
         reverse(res.begin(),res.end());
         return res;
