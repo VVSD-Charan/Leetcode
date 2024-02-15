@@ -17,8 +17,7 @@ public:
             {
                 swap(nums[index],nums[start_index]);
                 start_index++;
-
-                if(start_index > index)index = start_index;
+                index++;
             }
             else
             {
