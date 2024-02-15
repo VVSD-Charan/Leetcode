@@ -4,34 +4,26 @@ public:
     {
         sort(intervals.begin(),intervals.end());
 
-        int l = intervals[0][0];
-        int r = intervals[0][1];
+        int start_time = intervals[0][0];
+        int end_time = intervals[0][1];  
 
-        vector<vector<int>>arr;
+        vector<vector<int>>merged;  
 
         for(int i = 1 ; i < intervals.size() ; i++)
         {
-            if(intervals[i][0] <= r)
+            if(intervals[i][0] <= end_time)
             {
-                r = max(r , intervals[i][1]);
+                end_time = max(end_time,intervals[i][1]);
             }
             else
             {
-                vector<int>temp;
-                temp.push_back(l);
-                temp.push_back(r);
-                arr.push_back(temp);
-
-                l = intervals[i][0];
-                r = intervals[i][1];
+                merged.push_back({start_time,end_time});
+                start_time = intervals[i][0];
+                end_time = intervals[i][1];
             }
         }
 
-        vector<int>temp;
-        temp.push_back(l);
-        temp.push_back(r);
-
-        arr.push_back(temp);
-        return arr;    
+        merged.push_back({start_time,end_time});
+        return merged;
     }
 };
