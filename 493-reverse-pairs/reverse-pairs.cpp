@@ -38,7 +38,7 @@ class Solution {
         }
     }
 
-    void countInversions(vector<pair<int,int>>&arr,int lo,int mid,int hi,int &counter)
+    void countReversePairs(vector<pair<int,int>>&arr,int lo,int mid,int hi,int &counter)
     {
         int total_count = 0;
         int j = mid + 1;
@@ -63,7 +63,7 @@ class Solution {
         mergeSort(arr,lo,mid,counter);
         mergeSort(arr,mid+1,hi,counter);
 
-        countInversions(arr,lo,mid,hi,counter);
+        countReversePairs(arr,lo,mid,hi,counter);
         mergeArrays(arr,lo,mid,hi);
     }
 
