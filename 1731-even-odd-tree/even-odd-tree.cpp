@@ -11,14 +11,8 @@
  */
 class Solution {
 
-    bool isIncreasingAndOdd(vector<int>&arr)
+    bool isIncreasing(vector<int>&arr)
     {
-        for(int i = 0 ; i < arr.size() ; i++)
-        {
-            int modd = (arr[i] % 2);
-            if(modd == 0)return false;
-        }
-
         for(int i = 1 ; i < arr.size() ; i++)
         {
             if(arr[i] <= arr[i-1])return false;
@@ -26,15 +20,8 @@ class Solution {
         return true;
     }
 
-     bool isDecreasingAndEven(vector<int>&arr)
+     bool isDecreasing(vector<int>&arr)
     {
-        for(int i = 0 ; i < arr.size() ; i++)
-        {
-            int modd = (arr[i] % 2);
-
-            if(modd > 0)return false;
-        }
-
         for(int i = 1 ; i < arr.size() ; i++)
         {
             if(arr[i] >= arr[i-1])return false;
@@ -59,6 +46,8 @@ public:
                 TreeNode* node = q.front(); q.pop();
                 arr.push_back(node->val);
 
+                if((current_level % 2) != (node->val % 2))return false;
+
                 if(node->left)q.push(node->left);
                 if(node->right)q.push(node->right);
             }
@@ -66,11 +55,11 @@ public:
             bool isValid = false;
             if(current_level & 1)
             {
-                isValid = isIncreasingAndOdd(arr);
+                isValid = isIncreasing(arr);
             }
             else
             {
-                isValid = isDecreasingAndEven(arr);
+                isValid = isDecreasing(arr);
             }
 
             if(!isValid)return false;
