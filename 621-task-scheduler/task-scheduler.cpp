@@ -1,53 +1,48 @@
 class Solution {
 public:
-    int leastInterval(vector<char>& tasks, int n) 
-    {
-        vector<int>freq(26,0);
-
-        for(int i = 0 ; i < tasks.size() ; i++)
-        {
-            freq[tasks[i]-'A']++;
-        }    
+    int leastInterval(vector<char>& tasks, int n) {
+        vector<int>freq(26, 0);
+        for(int i = 0; i < tasks.size(); i++){
+            freq[tasks[i] - 'A']++;
+        }
 
         priority_queue<int>pq;
-
-        for(int i = 0 ; i < 26 ; i++)
-        {
-            if(freq[i] > 0)
-            {
+        for(int i = 0; i < 26; i++){
+            if(freq[i] > 0){
                 pq.push(freq[i]);
             }
         }
 
-        int total_time = 0;
+        int res = 0;
 
-        while(pq.size() > 0)
-        {
-            int empty_slots = n+1;
-            int filled_slots = 0;
+        while(pq.size() > 0){
+            int nonused = n + 1;
+            int used = 0;
 
-            vector<int>temp_tasks;
+            vector<int>temp;
 
-            while(pq.size()>0 && empty_slots>0)
-            {
-                temp_tasks.push_back(pq.top());
+            while(pq.size() > 0 && nonused > 0){
+                temp.push_back(pq.top());
                 pq.pop();
 
-                empty_slots = empty_slots - 1;
-                filled_slots = filled_slots + 1;
+                nonused--;
+                used++;
             }
 
-            total_time = total_time + filled_slots;
+            res += used;
 
-            for(int i = 0 ; i < filled_slots ; i++)
-            {
-                if(temp_tasks[i] == 1)continue;
-                pq.push(temp_tasks[i]-1);
+            for(int i = 0; i < used; i++){
+                if(temp[i] == 1){
+                    continue;
+                }
+                pq.push(temp[i] - 1);
             }
 
-            if(pq.size() > 0)total_time += empty_slots;
+            if(pq.size() > 0){
+                res += nonused;
+            }
         }
 
-        return total_time;
+        return res;
     }
 };
