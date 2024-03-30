@@ -1,40 +1,38 @@
 class Solution {
 
-    int atMost(vector<int>&arr,int k,int &n)
+    int atMost(vector<int>&arr,int k)
     {
-        unordered_map<int,int>mp;
+        map<int,int>mp;
+        int low = 0;
+        int high = 0;
+        int arrays = 0;
 
-        int total_arrays = 0;
-        int lo = 0;
-        int hi = 0;
-
-        while(hi < n)
+        while(high < arr.size())
         {
-            mp[arr[hi]]++;
+            mp[arr[high]]++;
 
             while(mp.size() > k)
             {
-                mp[arr[lo]]--;
+                mp[arr[low]]--;
 
-                if(mp[arr[lo]] == 0)
+                if(mp[arr[low]] == 0)
                 {
-                    mp.erase(arr[lo]);
+                    mp.erase(arr[low]);
                 }
 
-                lo = lo + 1;
+                low = low + 1;
             }
 
-            total_arrays = total_arrays + (hi - lo + 1);
-            hi = hi + 1;
+            arrays += (high - low + 1);
+            high = high + 1;
         }
 
-        return total_arrays;
+        return arrays;
     }
 
 public:
     int subarraysWithKDistinct(vector<int>& nums, int k) 
     {
-        int n = nums.size();
-        return (atMost(nums,k,n) - atMost(nums,k-1,n));    
+        return (atMost(nums,k) - atMost(nums,k-1));    
     }
 };
