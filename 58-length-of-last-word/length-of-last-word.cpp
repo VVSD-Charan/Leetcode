@@ -6,18 +6,17 @@ public:
 
         while(n >= 0 && s[n] == ' ')
         {
-            n--;
+            n = n - 1;
         }    
 
-        int cnt = 0;
+        int answer = 0;
 
-        for(int i = n ; i >= 0 ; i--)
+        while(n >= 0 && s[n] != ' ')
         {
-            if(s[i] == ' ')return cnt;
-
-            cnt++;
+            answer = answer + 1;
+            n = n - 1;
         }
 
-        return cnt;
+        return answer;
     }
 };
