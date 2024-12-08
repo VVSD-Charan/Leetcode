@@ -1,21 +1,5 @@
 class Solution {
 
-    // Helper function
-    int search_array(vector<vector<int>>&events,int target,int low,int high){
-        while(high - low > 1){
-            int mid = (low + high)>>1;
-            if(events[mid][0] >= target){
-                high = mid;
-            }else{
-                low = mid;
-            }
-        }
-
-        if(events[low][0] >= target)return low;
-        if(events[high][0] >= target)return high;
-        return -1;
-    }
-
 public:
     int maxTwoEvents(vector<vector<int>>& events) {
         // Sorting events based on start times
@@ -32,6 +16,22 @@ public:
         for(int i = n-2 ; i >= 0 ; i--){
             suffix[i] = max(suffix[i+1],events[i][2]);
         } 
+
+        // Binary search
+        auto search_array = [](vector<vector<int>>&events,int target,int low,int high){
+            while(high - low > 1){
+                int mid = (low + high)>>1;
+                if(events[mid][0] >= target){
+                    high = mid;
+                }else{
+                    low = mid;
+                }
+            }
+
+            if(events[low][0] >= target)return low;
+            if(events[high][0] >= target)return high;
+            return -1;
+        };
 
         // Finding the max value of an interval that starts after each end time
         int max_answer = suffix[0];
