@@ -10,10 +10,10 @@ class Solution(object):
 
         # Creating a list for suffix_maximum
         n = len(events)
-        suffix_maximum = [events[n-1][2]]
+        suffix_maximum = [0]*n
+        suffix_maximum[n-1] = events[n-1][2]
         for i in range(n-2,-1,-1):
-            suffix_maximum.append(max(events[i][2],suffix_maximum[-1]))
-        suffix_maximum = suffix_maximum[::-1]
+            suffix_maximum[i] = max(events[i][2],suffix_maximum[i+1])
 
         #Iterating intervals
         maximum_sum = suffix_maximum[0]
